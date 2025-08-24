@@ -65,7 +65,9 @@ while control == 0:
     encrypt_total = len(play_keys[0])
     encrypt_hit = play_keys[1].count("*")
     encryption_status = f"Progress: {play_keys[1].count("*")}/{len(play_keys[0])}"
-    print(encryption_status)
+    print(f"-- Score: {encryption_status} --")
+    print(f"-- This is a record of all the Missed characters --\n")
+    print(f"[-- {fail_list} --]\n\n")
 
     if encrypt_hit == 0:
         control = control + 1
@@ -85,28 +87,30 @@ while control == 0:
         #   select loop
         if status == 1:
             # Loop check to validify user input
-            chr = input("Guess a charcater! *(only one at a time!)" )
+            chr = input("-- Guess a charcater! *(only one at a time!) --")
             while len(chr) != 1:
-                chr = input("Said only one character at a time!: ")
+                chr = input("-- Said only one character at a time!: --")
 
             # if input in encryption key, flip to reveal, or store failed input in list
             if chr in play_keys[0]:
                 play_keys = encryption_list.show_flip(chr, play_keys)
-                print(play_keys[0])
+                #print(play_keys[0])
                 print(play_keys[1])
             else:
                 fail_list.append(chr)
-                print(fail_list)
+                print("-- You Missed! --")
+                print(f"-- [ {chr} ] is not in the encryption key --")
 
         elif status == 2:
-            print("I'll give you 3 hints!")
+            print("\n\nI'll give you 3 hints!")
             play_keys = encryption_list.hint_flip(play_keys)
-            print(play_keys[0])
+            #print(play_keys[0])
             print(play_keys[1])
 
         elif status == 3:
             control = 1
         
+        print("\n ----------------------------------------------------------------------------------------------\n\n\n")
 
 
         # if user 
